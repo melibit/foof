@@ -9,6 +9,7 @@ enum class LexTokenType {
 
   lex_fn, // Function Definition
   lex_fn_yields,
+  lex_comma,
 
   lex_identifier, // Variable/Function name
   lex_intlit,     // Int literal
@@ -49,6 +50,8 @@ inline std::string to_string(const LexTokenType type) {
     return "lex_fn";
   case LexTokenType::lex_fn_yields:
     return "lex_fn_yields";
+  case LexTokenType::lex_comma:
+    return "lex_comma";
   case LexTokenType::lex_identifier:
     return "lex_identifier";
   case LexTokenType::lex_intlit:
@@ -157,6 +160,8 @@ private:
 
   LexToken tokeniseOperator(char op) {
     switch (op) {
+    case ',':
+      return {LexTokenType::lex_comma};
     case ':':
       return {LexTokenType::lex_colon};
     case '(':
